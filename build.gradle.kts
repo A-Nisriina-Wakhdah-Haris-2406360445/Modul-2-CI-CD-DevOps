@@ -43,6 +43,9 @@ dependencies {
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanageVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
+    testImplementation ("org.springframework.boot:spring-boot-starter-test")
+    testImplementation ("org.mockito:mockito-core")
+
 }
 
 tasks.register<Test>("unitTest") {
