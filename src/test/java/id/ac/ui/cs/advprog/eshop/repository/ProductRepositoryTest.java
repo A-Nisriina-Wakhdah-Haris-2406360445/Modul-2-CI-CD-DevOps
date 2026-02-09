@@ -94,4 +94,33 @@ public class ProductRepositoryTest {
         assertNotEquals(100, updated.getProductQuantity());
     }
 
+    @Test
+    void testDeleteAndFindById(){
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Roma Sari Gandum");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        // delete product
+        productRepository.deleteById("eb558e9f-1c39-460e-8860-71af6af63bd6");
+
+        // positive case
+        assertNull(productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6"));
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+
+        // negative case
+        Product product2 = new Product();
+        product2.setProductId("123");
+        product2.setProductName("Kerupuk ikan");
+        product2.setProductQuantity(10);
+        productRepository.create(product2);
+
+        productRepository.deleteById("12345");  // delete by the wrong product id (unexisted)
+
+        assertNotNull(productRepository.findById("123"));
+        assertTrue(productIterator.hasNext());
+    }
+
 }
