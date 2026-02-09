@@ -1,7 +1,8 @@
 <details>
 <Summary><b>Refleksi 1</b></Summary>
-Berikut ini adalah clean code principles yang telah saya gunakan dalam mengimplementasikan dua fitur baru menggunakan 
+Berikut ini adalah clean code principles yang telah saya gunakan dalam mengimplementasikan dua fitur baru menggunakan
 Spring Boot, yaitu:
+
 1. Meaningful names: Dalam membuat kode untuk mengimplementasikan kedua fitur tersebut saya menggunakan prinsip meaningful
 names. Tujuannya adalah agar saya tidak lupa mengenai fungsi variabel yang telah saya buat, misalnya variabel product pada
 method deleteById yang fungsinya untuk menyimpan suatu produk
