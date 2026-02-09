@@ -12,12 +12,12 @@
   <input type="hidden" th:field="*{productId}" />
 
   <label>Product Name</label>
-  <input type="text" th:field="*{productName}" />
+  <input type="text" th:field="*{productName}" required/>
 
   <br>
 
   <label>Quantity</label>
-  <input type="number" th:field="*{productQuantity}" />
+  <input type="number" th:field="*{productQuantity}" required min="0"/>
 
   <br>
 
