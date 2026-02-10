@@ -30,12 +30,18 @@ public class ProductRepositoryTest {
         product.setProductQuantity(100);
         productRepository.create(product);
 
+        // positive case
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
         Product savedProduct = productIterator.next();
         assertEquals(product.getProductId(), savedProduct.getProductId());
         assertEquals(product.getProductName(), savedProduct.getProductName());
         assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+
+        // negative case
+        assertNotEquals("123", savedProduct.getProductId());
+        assertNotEquals("sampo cap bambang", savedProduct.getProductName());
+        assertNotEquals(1, savedProduct.getProductQuantity());
     }
 
     @Test
@@ -60,11 +66,21 @@ public class ProductRepositoryTest {
 
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
+
+        // positive case
         Product savedProduct = productIterator.next();
         assertEquals(product1.getProductId(), savedProduct.getProductId());
+        // negative case
+        assertNotEquals(product2.getProductId(), savedProduct.getProductId());
+
         savedProduct = productIterator.next();
+        // positive case
         assertEquals(product2.getProductId(), savedProduct.getProductId());
+        // negative case
+        assertNotEquals(product1.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
+
+
     }
 
     @Test
@@ -76,7 +92,7 @@ public class ProductRepositoryTest {
         productRepository.create(product);
 
         // edit
-        Product editedProduct = new Product();;
+        Product editedProduct = new Product();
         editedProduct.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         editedProduct.setProductName("Sampo Anti Ketombe");
         editedProduct.setProductQuantity(150);
