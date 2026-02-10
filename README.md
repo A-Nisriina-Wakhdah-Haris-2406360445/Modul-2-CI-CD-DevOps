@@ -6,7 +6,7 @@ Spring Boot, yaitu:
 1. Meaningful names: Dalam membuat kode untuk mengimplementasikan kedua fitur tersebut saya menggunakan prinsip meaningful
 names. Tujuannya adalah agar saya tidak lupa mengenai fungsi variabel yang telah saya buat, misalnya variabel product pada
 method deleteById yang fungsinya untuk menyimpan suatu produk
-2. Function: Saya juga membuat function untuk mengimplementasikan setiap fitur yang ada. Tujuannya adalah agar kode untuk
+2. Function: Saya juga membuat function untuk mengimplementasikan setiap fitur yang ada.gti Tujuannya adalah agar kode untuk
 suatu fitur tidak bercampur dengan kode fitur lain dan agar dapat dipakai berulang kali. Selain itu, dalam membuat function
 saya menggunakan nama yang menggambarkan perilaku function tersebut, seperti function update yang fungsinya untuk mengedit(update)
 product yang telah dibuat
