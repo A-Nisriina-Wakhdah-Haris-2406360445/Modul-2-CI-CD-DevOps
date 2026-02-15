@@ -80,7 +80,6 @@ public class ProductRepositoryTest {
         assertNotEquals(product1.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
 
-
     }
 
     @Test
@@ -111,7 +110,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void testDeleteAndFindById(){
+    void testDelete(){
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Roma Sari Gandum");
@@ -138,8 +137,82 @@ public class ProductRepositoryTest {
 
         Iterator<Product> iteratorAfterWrongDeletion = productRepository.findAll();
         assertTrue(iteratorAfterWrongDeletion.hasNext());
-
-
     }
+
+    @Test
+    void testFindById_returnProduct() { // new
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Roma Sari Gandum");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        assertEquals(product, productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6"));
+    }
+
+    @Test
+    void testFindById_emptyRepo() {  // new
+        assertNull(productRepository.findById("000"));  // empty repo
+    }
+
+   @Test
+   void testFindById_notFound() {   // new
+        Product product = new Product();
+        product.setProductId("123-143");
+        product.setProductQuantity(99);
+        product.setProductName("Bakpia");
+        productRepository.create(product);
+
+        // non-existing id
+       assertNull(productRepository.findById("990-000"));
+   }
+
+    @Test
+    void testUpdate() {   // new
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Tteokbokki");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        Product updated = new Product();
+        updated.setProductName("Pringles");
+        updated.setProductQuantity(15);
+        updated.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        productRepository.update(updated);
+
+        assertEquals("Pringles", updated.getProductName());
+        assertEquals(15, updated.getProductQuantity());
+    }
+
+    @Test
+    void testUpdate_emptyRepo() {   // new
+        Product product = new Product();
+        product.setProductName("Roti");
+
+        productRepository.update(product);
+        assertNull(productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6"));
+    }
+
+    @Test
+    void testUpdate_wrongIdProduct() {    // new
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-461e-8869-71af6af63bd6");
+        product.setProductName("Amplang");
+        product.setProductQuantity(23);
+        productRepository.create(product);
+
+        Product updated = new Product();
+        updated.setProductId("990-009");    // update produk yang tidak ada di list
+        updated.setProductName("Teh");
+        updated.setProductQuantity(2);
+        productRepository.update(updated);
+
+        assertEquals("Amplang", productRepository.findById("eb558e9f-1c39-461e-8869-71af6af63bd6").getProductName());
+    }
+
+
+
+
 
 }

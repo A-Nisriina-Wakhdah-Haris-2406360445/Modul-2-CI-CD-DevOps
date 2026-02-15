@@ -24,7 +24,7 @@ public class ProductController {
     public String createProductPage(Model model){
         Product product = new Product();
         model.addAttribute("product", product);
-        return "createProduct";
+        return "CreateProduct";
     }
 
     @PostMapping("/create")
@@ -60,6 +60,4 @@ public class ProductController {
         service.deleteById(id);
         return "redirect:/product/list";
     }
-
-
 }
