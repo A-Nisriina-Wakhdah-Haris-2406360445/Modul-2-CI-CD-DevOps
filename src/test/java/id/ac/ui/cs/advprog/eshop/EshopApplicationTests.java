@@ -3,6 +3,8 @@ package id.ac.ui.cs.advprog.eshop;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 @SpringBootTest
 class EshopApplicationTests {
 
@@ -13,7 +15,10 @@ class EshopApplicationTests {
     @Test
     void runMain() {
         System.setProperty("server.port", "0"); // use available port so that it won't conflict with port 8080 (if we use port 8080 to run main program)
-        EshopApplication.main(new String[] {});
+
+        assertDoesNotThrow( () ->
+            EshopApplication.main(new String[] {}));
+
     }
 
 }

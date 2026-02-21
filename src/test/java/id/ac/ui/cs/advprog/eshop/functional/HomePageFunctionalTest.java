@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
-import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class HomePageFunctionalTest {
+class HomePageFunctionalTest {
     /**
      * The port number assigned to the running application during test execution.
      * Set automatically during each test run by Spring Framework's test context.
@@ -39,7 +37,7 @@ public class HomePageFunctionalTest {
     }
 
     @Test
-    void pageTittle_isCorrect(ChromeDriver driver) throws Exception{
+    void pageTittle_isCorrect(ChromeDriver driver) {
         // exercise
         driver.get(baseUrl);
         String pageTitle = driver.getTitle();
@@ -49,7 +47,7 @@ public class HomePageFunctionalTest {
     }
 
     @Test
-    void welcomeMessage_homePage_isCorrect(ChromeDriver driver) throws Exception{
+    void welcomeMessage_homePage_isCorrect(ChromeDriver driver) {
         // exercise
         driver.get(baseUrl);
         String welcomeMessage = driver.findElement(By.tagName("h3")).getText();

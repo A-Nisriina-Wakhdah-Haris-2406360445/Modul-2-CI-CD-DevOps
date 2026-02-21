@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class CreateProductFunctionalTest {
+class CreateProductFunctionalTest {
 
     @LocalServerPort
     private int serverPort;
@@ -32,13 +32,13 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void titleCreateProduct_isCorrect(ChromeDriver driver) throws Exception{
+    void titleCreateProduct_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl);
         String titlePage = driver.getTitle();
         assertEquals("Create New Product", titlePage);
     }
     @Test
-    void welcomeMessage_CreateProduct_isCorrect(ChromeDriver driver) throws Exception{
+    void welcomeMessage_CreateProduct_isCorrect(ChromeDriver driver) {
         // exercise
         driver.get(baseUrl);
         String welcomeMessage = driver.findElement(By.tagName("h3")).getText();
@@ -48,7 +48,7 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void testInputName(ChromeDriver driver) throws Exception{
+    void testInputName(ChromeDriver driver) {
         driver.get(baseUrl);
 
         // Clear field to empty it from any previous data
@@ -70,7 +70,7 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void testInputQuantity(ChromeDriver driver) throws Exception{
+    void testInputQuantity(ChromeDriver driver) {
         driver.get(baseUrl);
 
         // Clear field to empty it from any previous data
@@ -92,7 +92,7 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void testCreateproduct(ChromeDriver driver) throws Exception{
+    void testCreateproduct(ChromeDriver driver) {
         driver.get(baseUrl);
 
         // fill product name

@@ -17,17 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductServiceImplTest {
+class ProductServiceImplTest {
 
   @Mock
   ProductRepository productRepository;
 
   @InjectMocks
   ProductServiceImpl productService;
-
-  @BeforeEach
-  void setUp() {
-  }
 
   @Test
   void testCreate() {

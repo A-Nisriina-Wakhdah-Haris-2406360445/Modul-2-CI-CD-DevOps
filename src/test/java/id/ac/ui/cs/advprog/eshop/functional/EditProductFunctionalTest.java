@@ -19,7 +19,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class EditProductFunctionalTest {
+class EditProductFunctionalTest {
     @LocalServerPort
     private int serverPort;
 
@@ -44,14 +44,14 @@ public class EditProductFunctionalTest {
     }
 
     @Test
-    void titleEditProduct_isCorrect(ChromeDriver driver) throws Exception{
+    void titleEditProduct_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl);
         String titlePage = driver.getTitle();
         assertEquals("Edit Product", titlePage);
     }
 
     @Test
-    void welcomeMessage_EditProduct_isCorrect(ChromeDriver driver) throws Exception{
+    void welcomeMessage_EditProduct_isCorrect(ChromeDriver driver) {
         // exercise
         driver.get(baseUrl);
         String welcomeMessage = driver.findElement(By.tagName("h2")).getText();
@@ -61,7 +61,7 @@ public class EditProductFunctionalTest {
     }
 
     @Test
-    void testInputName(ChromeDriver driver) throws Exception{
+    void testInputName(ChromeDriver driver) {
         driver.get(baseUrl);
 
         // Clear field to empty it from any previous data
@@ -83,7 +83,7 @@ public class EditProductFunctionalTest {
     }
 
     @Test
-    void testInputQuantity(ChromeDriver driver) throws Exception{
+    void testInputQuantity(ChromeDriver driver) {
         driver.get(baseUrl);
 
         // Clear field to empty it from any previous data
