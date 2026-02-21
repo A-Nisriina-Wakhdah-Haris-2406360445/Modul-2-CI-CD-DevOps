@@ -89,7 +89,16 @@ sonar {
         property("sonar.organization", "a-nisriina-wakhdah-haris-2406360445")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.java.source", "21")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            "${layout.buildDirectory.get()}/reports/jacoco/test/jacocoTestReport.xml"
+        )
     }
 }
 
-
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
