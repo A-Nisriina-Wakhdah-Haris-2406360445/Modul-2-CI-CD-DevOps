@@ -98,3 +98,4 @@ kode pengujian sesuai dengan behavior yang akan diuuji, dengan begitu kode menja
     SonarCloud dan CodeQL yang berfungsi untuk menjalankan pemeriksaan keamanan dan analisis kode secara otomatis.
     Project ini juga sudah memenuhi konsep Continous Deployment karena sudah terhubung dengan Koyeb yang akan melakukan auto deploy setiap kali terdapat perubahan pada branch main dengan syarat semua proses CI harus berhasil, sehingga kita tidak perlu melakukan deployment secara manual.
     Oleh karena itu, implementasi saat ini sudah sesuai dengan definisi Continous integration dan Continous Deployment.
+</details>
