@@ -47,4 +47,54 @@ serta dapat membuat seorang programmer kesulitan dalam membaca dan memahami kode
 Solusi yang dapat dilakukan untuk menghindari permasalahan tersebut adalah memisahakan antara kode setup dengan kode pengujian beharivor yang spesifik,
 seperti membuat base functional test class yang berisi setup umum agar test suite lain bisa mewarisi (inherit) dari base class tersebut dan mengimplementasikan
 kode pengujian sesuai dengan behavior yang akan diuuji, dengan begitu kode menjadi lebih bersih, mudah dirawat, rapih dan terstruktur
+</details>
 
+<details>
+<Summary><b>Refleksi 3 (Modul 2)</b></Summary>
+
+1. Berikut ini adalah code quality issues yang saya hadapi ketika mengerjakan tutorial ini, kebanyakan merupakan issues mengenai maintainability code:
+    1. Field injection<br>
+        Masalah ini terjadi karena terdapat kode yang menggunakan @Autowired, seperti:<br>
+       @Autowired<br>
+       private ProductService service;<br>
+        Strategi: cara saya menangani masalah ini adalah dengan menghapus @Autowired dan menggantikannya dengan membuat constructor (constructor injection) dan mengubah variabel di atas menjadi private final ProductService service
+    2. Test tanpa assertion<br>
+         File EshopApplicationTest.java berisi kode mengenai unit-test untuk aplikasi Eshop. Namun pada method yang mengetes method main tidak ditambahkan assertion sehingga kode tersebut tidak memverifikasi behavior yang ingin di-test
+         Stategi: Mengubah blok kode<br>
+         @Test
+         void runMain() {
+             System.setProperty("server.port", "0");
+             assertDoesNotThrow( () ->
+                 EshopApplication.main(new String[] {}));
+         }<br>
+         Menjadi sebagai berikut dengan menambahkan assertion<br>
+       @Test
+       void runMain() {
+           System.setProperty("server.port", "0"); 
+           assertDoesNotThrow( () ->
+             EshopApplication.main(new String[] {}));
+       }
+    3. 'public' modifier pada kelas unit-test<br>
+       Masalah ini terjadi karena saya menggunakan modifier 'public' pada semua kelas unit-test padahal sebenarnya tidak perlu 'public'. Hal ini dikarenakan, Sonar menganggap public di test class sebagai unnecessary modifier (berlaku sejak JUnit 5)
+        Strategi: Menghapus modifier 'public' pada semua test class
+   4. Unused dependency dan import<br>
+        Di beberapa file unit-test saya memasukkan cukup banyak import dan dependency yang saya kira akan digunakan padahal kenyataannya kode tersebut tidak digunakan sehingga menurunkan maintainability code karena terdapat dead code<br>
+        Strategi: Menghapus import dan dependency yang tidak diperlukan sehingga tidak ada dead code atau unused import
+   5. throws Exception pada method test<br>
+        Ketika saya membuat kelas yang berisi functional test, saya memasukkan throws Exception pada method test tersebut sehingga menimbulkan masalah maintainability code karena pada method tersebut tidak memiliki checked exception (hanya tulisan throws Exception saja )<br>
+        Strategi: Menghapus tulisan throws Exception untuk menghindari generic exception declaration
+   6. Method @BeforeEach yang kosong<br>
+        Saya membuat method setUp yang kosong di dalam file unit-test<br>
+      @BeforeEach<br>
+      void setUp() {<br>
+      }<br>
+        Sehingga menimbulkan masalah karena methodnya kosong dan tidak digunakan(dead code)<br>
+        Strategi: Menghapus method tersebut untuk menghilangkan dead code
+   7. JaCoCO coverage 0% on new code<br>
+        Ketika saya push kode yang baru ke Sonar, pengecekannya gagal karena ia menunjukkan 0.0% Coverage on New Code. Penyebabnya adalah karena sonar tidak menemukan file XML coverage<br>
+        Strategi: Memperbaiki buil.gradle.kts dengan menambahkan property, seperti  "sonar.coverage.jacoco.xmlReportPaths" dan mengaktifkan xml.required.set(true) untuk memastikan coverage XML sudah tersedia sebelum dicek oleh Sonar
+        
+2. Berdasarkan CI/CD workflows yang saya miliki, project saya sudah memenuhi konsep Continous Integration dengan baik. Hal ini dikarenakan, workflows yang saya buat sudah menerapkan tests automation setiap kali push atau pull request ketika terdapat perubahan kode. Selain itu, terdapat
+    SonarCloud dan CodeQL yang berfungsi untuk menjalankan pemeriksaan keamanan dan analisis kode secara otomatis.
+    Project ini juga sudah memenuhi konsep Continous Deployment karena sudah terhubung dengan Koyeb yang akan melakukan auto deploy setiap kali terdapat perubahan pada branch main dengan syarat semua proses CI harus berhasil, sehingga kita tidak perlu melakukan deployment secara manual.
+    Oleh karena itu, implementasi saat ini sudah sesuai dengan definisi Continous integration dan Continous Deployment.
