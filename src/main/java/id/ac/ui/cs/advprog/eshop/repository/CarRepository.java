@@ -46,7 +46,7 @@ public class CarRepository {
         return car;
       }
     }
-    return null;  // Handle the case where thee car is not found
+    return null;  // Handle the case where the car is not found
   }
 
   public void delete(String id) {
