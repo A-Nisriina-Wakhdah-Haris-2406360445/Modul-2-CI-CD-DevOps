@@ -59,8 +59,8 @@ kode pengujian sesuai dengan behavior yang akan diuuji, dengan begitu kode menja
        private ProductService service;<br>
         Strategi: cara saya menangani masalah ini adalah dengan menghapus @Autowired dan menggantikannya dengan membuat constructor (constructor injection) dan mengubah variabel di atas menjadi private final ProductService service
     2. Test tanpa assertion<br>
-         File EshopApplicationTest.java berisi kode mengenai unit-test untuk aplikasi Eshop. Namun pada method yang mengetes method main tidak ditambahkan assertion sehingga kode tersebut tidak memverifikasi behavior yang ingin di-test
-         Stategi: Mengubah blok kode<br>
+         File EshopApplicationTest.java berisi kode mengenai unit-test untuk aplikasi Eshop. Namun pada method yang mengetes method main tidak ditambahkan assertion sehingga kode tersebut tidak memverifikasi behavior yang ingin di-test<br>
+         Strategi: Mengubah blok kode<br>
          @Test
          void runMain() {
              System.setProperty("server.port", "0");
@@ -75,7 +75,7 @@ kode pengujian sesuai dengan behavior yang akan diuuji, dengan begitu kode menja
              EshopApplication.main(new String[] {}));
        }
     3. 'public' modifier pada kelas unit-test<br>
-       Masalah ini terjadi karena saya menggunakan modifier 'public' pada semua kelas unit-test padahal sebenarnya tidak perlu 'public'. Hal ini dikarenakan, Sonar menganggap public di test class sebagai unnecessary modifier (berlaku sejak JUnit 5)
+       Masalah ini terjadi karena saya menggunakan modifier 'public' pada semua kelas unit-test padahal sebenarnya tidak perlu 'public'. Hal ini dikarenakan, Sonar menganggap public di test class sebagai unnecessary modifier (berlaku sejak JUnit 5)<br>
         Strategi: Menghapus modifier 'public' pada semua test class
    4. Unused dependency dan import<br>
         Di beberapa file unit-test saya memasukkan cukup banyak import dan dependency yang saya kira akan digunakan padahal kenyataannya kode tersebut tidak digunakan sehingga menurunkan maintainability code karena terdapat dead code<br>
@@ -90,12 +90,12 @@ kode pengujian sesuai dengan behavior yang akan diuuji, dengan begitu kode menja
       }<br>
         Sehingga menimbulkan masalah karena methodnya kosong dan tidak digunakan(dead code)<br>
         Strategi: Menghapus method tersebut untuk menghilangkan dead code
-   7. JaCoCO coverage 0% on new code<br>
+   7. JaCoCo coverage 0% on new code<br>
         Ketika saya push kode yang baru ke Sonar, pengecekannya gagal karena ia menunjukkan 0.0% Coverage on New Code. Penyebabnya adalah karena sonar tidak menemukan file XML coverage<br>
         Strategi: Memperbaiki buil.gradle.kts dengan menambahkan property, seperti  "sonar.coverage.jacoco.xmlReportPaths" dan mengaktifkan xml.required.set(true) untuk memastikan coverage XML sudah tersedia sebelum dicek oleh Sonar
         
 2. Berdasarkan CI/CD workflows yang saya miliki, project saya sudah memenuhi konsep Continous Integration dengan baik. Hal ini dikarenakan, workflows yang saya buat sudah menerapkan tests automation setiap kali push atau pull request ketika terdapat perubahan kode. Selain itu, terdapat
-    SonarCloud dan CodeQL yang berfungsi untuk menjalankan pemeriksaan keamanan dan analisis kode secara otomatis.
+    SonarCloud, CodeQL, dan Scorecard yang berfungsi untuk menjalankan pemeriksaan keamanan dan analisis kode secara otomatis.
     Project ini juga sudah memenuhi konsep Continous Deployment karena sudah terhubung dengan Koyeb yang akan melakukan auto deploy setiap kali terdapat perubahan pada branch main dengan syarat semua proses CI harus berhasil, sehingga kita tidak perlu melakukan deployment secara manual.
     Oleh karena itu, implementasi saat ini sudah sesuai dengan definisi Continous integration dan Continous Deployment.
 </details>
